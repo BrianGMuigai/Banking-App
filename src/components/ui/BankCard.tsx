@@ -7,10 +7,20 @@ import Copy from '../Copy'
 
 const BanksCards = ({ account, userName, showBalance = true }: CreditCardProps) => {
 
-  console.log(account);
+  console.log('Account:', account);
+    if (!account) {
+    console.error('Account is undefined');
+    return <div>Account data is unavailable</div>;
+  }
+
+  if (!account.appwriteItemId) {
+    console.error('appwriteItemId is undefined on account:', account);
+    return <div>Account ID is unavailable</div>;
+  }
+
   return (
     <div className="flex flex-col">
-      <Link href={`/transaction-history/?id=${account.appwriteItemId}`} className="bank-card">
+       <Link href={`/transaction-history/?id=${ account.appwriteItemId}`} className="bank-card">
         <div className="bank-card_content">
           <div>
             <h1 className="text-16 font-semibold text-white">

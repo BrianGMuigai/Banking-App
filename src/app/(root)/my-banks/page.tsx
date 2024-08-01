@@ -2,7 +2,7 @@ import HeaderBox from '@/components/headerbox';
 import { getAccounts } from "../../../../lib/actions/bank.actions";
 import { getLoggedInUser } from "../../../../lib/actions/user.action";
 import React from 'react'
-import BanksCards from '@/components/ui/BanksCards';
+import BanksCards from '@/components/ui/BankCard';
 
 const MyBanks = async () => {
   const loggedIn = await getLoggedInUser();
