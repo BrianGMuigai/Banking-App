@@ -58,7 +58,7 @@ const AuthForm = ({type}: {type: string}) => {
               email: data.email,
               password: data.password
             }
-         const newUser = await signUp( data);
+         const newUser = await signUp( userData);
 
          setUser(newUser)
         
@@ -114,7 +114,7 @@ const AuthForm = ({type}: {type: string}) => {
       </header>
       { user ?(
         <div className="flex flex-col gap-4">
-          <PlaidLink user={user} variant= "primary"/>
+          <PlaidLink user={user} variant="primary"/>
         </div>
       ) :(
         <>
