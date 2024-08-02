@@ -22,6 +22,8 @@ import { Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { getLoggedInUser, signIn, signUp } from '../../../lib/actions/user.action'
 import PlaidLink from '../PlaidLink'
+import { MdEmail } from "react-icons/md";
+
  
 const AuthForm = ({type}: {type: string}) => {
       const router = useRouter();
@@ -125,7 +127,7 @@ const AuthForm = ({type}: {type: string}) => {
             <>
         <div className="flex gap-4">
         <CustomInput
-        control={form.control} name="firstName" label="First Name" placeholder="Enter your first name"
+        control={form.control} name="firstName" label="First Name" placeholder="Enter your first name "
         />
       <CustomInput
         control={form.control} name="lastName" label="Last Name" placeholder="Enter your last name"
@@ -158,10 +160,10 @@ const AuthForm = ({type}: {type: string}) => {
          )}
 
        <CustomInput
-        control={form.control} name="email" label="Email" placeholder="Enter your username"
+        control={form.control} name="email" label="Email" placeholder="Enter your email" icon={<MdEmail size={20} />} 
         />
            <CustomInput
-         control={form.control} name="password" label="Password" placeholder="Enter your password"
+         control={form.control} name="password" label="Password" placeholder="Enter your password"type="password"
         />
 
     <div className="flex flex-col gap-4">

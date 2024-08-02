@@ -1,19 +1,17 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { Button } from './ui/button'
-import { PlaidLinkOnSuccess, PlaidLinkOptions, usePlaidLink } from 'react-plaid-link'
+import React, { useCallback, useEffect, useState } from 'react';
+import { Button } from './ui/button';
+import { PlaidLinkOnSuccess, PlaidLinkOptions, usePlaidLink } from 'react-plaid-link';
 import { useRouter } from 'next/navigation';
 import { createLinkToken, exchangePublicToken } from '../../lib/actions/user.action';
 import Image from 'next/image';
 
 const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
   const router = useRouter();
-
   const [token, setToken] = useState('');
 
   useEffect(() => {
     const getLinkToken = async () => {
       const data = await createLinkToken(user);
-
       setToken(data?.linkToken);
     }
 
@@ -24,18 +22,17 @@ const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
     await exchangePublicToken({
       publicToken: public_token,
       user,
-    })
-
+    });
     router.push('/');
-  }, [user])
-  
+  }, [user]);
+
   const config: PlaidLinkOptions = {
     token,
     onSuccess
-  }
+  };
 
   const { open, ready } = usePlaidLink(config);
-  
+
   return (
     <>
       {variant === 'primary' ? (
@@ -46,7 +43,7 @@ const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
         >
           Connect bank
         </Button>
-      ): variant === 'ghost' ? (
+      ) : variant === 'ghost' ? (
         <Button onClick={() => open()} variant="ghost" className="plaidlink-ghost">
           <Image 
             src="/icons/connect-bank.svg"
@@ -56,7 +53,24 @@ const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
           />
           <p className='hidden text-[16px] font-semibold text-black-2 xl:block'>Connect bank</p>
         </Button>
-      ): (
+      ) : variant === 'destructive' ? (
+        <Button onClick={() => open()} variant="destructive" className="plaidlink-destructive">
+        
+        <div className="flex gap-2">
+        <Image 
+               src="/icons/plus.svg"
+              width={18}
+              height={18}
+              alt="plus"
+             
+            />
+            <h2 className=" gap-10 text-14 font-semibold text-gray-600">
+              Add Bank
+            </h2>
+          
+          </div> 
+        </Button>
+      ) : (
         <Button onClick={() => open()} className="plaidlink-default">
           <Image 
             src="/icons/connect-bank.svg"
@@ -68,7 +82,7 @@ const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
         </Button>
       )}
     </>
-  )
-}
+  );
+};
 
-export default PlaidLink
+export default PlaidLink;

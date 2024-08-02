@@ -1,14 +1,11 @@
-import Headerbox from "@/components/headerbox";
-import TotalBalanceBox from "@/components/TotalBalanceBox";
-import RightSideBar from "@/components/ui/RightSideBar";
-import React from "react";
-import { getLoggedInUser } from "../../../lib/actions/user.action";
-import { getAccount, getAccounts } from "../../../lib/actions/bank.actions";
 import RecentTransactions from "@/components/RecentTransactions";
+import TotalBalanceBox from "@/components/TotalBalanceBox";
+import RightSidebar from "@/components/ui/RightSideBar";
+import { getAccounts, getAccount } from "../../../lib/actions/bank.actions";
+import { getLoggedInUser } from "../../../lib/actions/user.action";
+import Headerbox from "@/components/headerbox";
 
-
-export default async function  page({searchParams:{id, page}}:SearchParamProps) {
-     
+const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
   const currentPage = Number(page as string) || 1;
   const loggedIn = await getLoggedInUser();
   const accounts = await getAccounts({ 
@@ -22,40 +19,39 @@ export default async function  page({searchParams:{id, page}}:SearchParamProps) 
 
   const account = await getAccount({ appwriteItemId })
 
-  
+  return (
+    <section className="home">
+      <div className="home-content">
+        <header className="home-header">
+          <Headerbox 
+            type="greeting"
+            title="Welcome"
+            user={loggedIn?.firstName || 'Guest'}
+            subtext="Access and manage your account and transactions efficiently."
+          />
 
-  return(<section className="home"> 
+          <TotalBalanceBox 
+            accounts={accountsData}
+            totalBanks={accounts?.totalBanks}
+            totalCurrentBalance={accounts?.totalCurrentBalance}
+          />
+        </header>
 
-                <div className = "home-content">
-  
-                  <header className= "home=header">
-  
-                  <Headerbox
-                    type="greeting"
-                    title="Welcome"
-                    user= {loggedIn?.firstName || 'Guest'}
-                    subtext="Access and manage your account and transaction efficiently."/>
-                          
-                          <TotalBalanceBox
-                            accounts={[accountsData]}
-                            totalBanks={accounts?.totalBanks}
-                            totalCurrentBalance={accounts?.totalCurrentBalance}
-                          />
-                      </header>
-          
-                      <RecentTransactions 
+        <RecentTransactions 
           accounts={accountsData}
           transactions={account?.transactions}
           appwriteItemId={appwriteItemId}
           page={currentPage}
         />
-                   </div>
-                   <RightSideBar 
+      </div>
+
+      <RightSidebar 
         user={loggedIn}
         transactions={account?.transactions}
         banks={accountsData?.slice(0, 2)}
       />
     </section>
-    );
-    
+  )
 }
+
+export default Home

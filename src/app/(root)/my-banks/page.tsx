@@ -1,8 +1,8 @@
-import HeaderBox from '@/components/headerbox';
-import { getAccounts } from "../../../../lib/actions/bank.actions";
-import { getLoggedInUser } from "../../../../lib/actions/user.action";
 import React from 'react'
-import BanksCards from '@/components/ui/BankCard';
+import { getAccounts } from '../../../../lib/actions/bank.actions';
+import BankCard from '@/components/ui/BankCard';
+import { getLoggedInUser } from '../../../../lib/actions/user.action';
+import Headerbox from '@/components/headerbox';
 
 const MyBanks = async () => {
   const loggedIn = await getLoggedInUser();
@@ -13,7 +13,7 @@ const MyBanks = async () => {
   return (
     <section className='flex'>
       <div className="my-banks">
-        <HeaderBox 
+        <Headerbox 
           title="My Bank Accounts"
           subtext="Effortlessly manage your banking activites."
         />
@@ -24,7 +24,7 @@ const MyBanks = async () => {
           </h2>
           <div className="flex flex-wrap gap-6">
             {accounts && accounts.data.map((a: Account) => (
-              <BanksCards 
+              <BankCard 
                 key={accounts.id}
                 account={a}
                 userName={loggedIn?.firstName}

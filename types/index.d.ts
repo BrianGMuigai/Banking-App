@@ -60,7 +60,7 @@ declare type Account = {
   type: string;
   subtype: string;
   appwriteItemId: string;
-  sharableId: string;
+  sharaebleId: string;
 };
 
 declare type Transaction = {
@@ -175,7 +175,7 @@ declare interface PaginationProps {
 
 declare interface PlaidLinkProps {
   user: User;
-  variant?: "primary" | "ghost";
+  variant?: "primary" | "ghost" | "destructive";
   dwollaCustomerId?: string;
 }
 
