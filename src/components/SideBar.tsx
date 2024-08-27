@@ -20,10 +20,10 @@ const SideBar = ({user}: SiderbarProps) => {
                 src="/icons/logo.svg"
                 width={34}
                 height={34}
-                alt="Haven Finance logo"
+                alt="Horizon Finance logo"
                 className ="size-[24px] max-xl:size-14">
                 </Image>
-            <h1 className = "sidebar-logo">Haven Finance</h1>
+            <h1 className = "sidebar-logo">Horizon Finance</h1>
             </Link>
            {sidebarLinks.map((item)=>{
              const isActive  =

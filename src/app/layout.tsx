@@ -12,7 +12,7 @@ const ibmPlexSerif =IBM_Plex_Serif({
 })
 
 export const metadata: Metadata = {
-  title: "Haven Finance",
+  title: "Horizon Finance",
   description: "Haven Finance is  a traditional bank prioritizing safety and security for your deposits and investments",
   icons:{
     icon:'/icons/logo.svg'
